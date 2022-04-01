@@ -26,7 +26,8 @@ jobs:
 
           DESCRIBE=`echo v0.2.7`
           BUILD=`echo $DESCRIBE | awk '{split($0,a,"-"); print a[2]}'`
-          TAG="v0.$BUILD.0.$(date +'%Y%m%d')"
+          echo $BUILD
+          TAG="v0.`echo $BUILD`.0-nightly.$(date +'%Y%m%d')"
           git tag -a $TAG -m "$TAG: nightly build"
           git push origin $TAG
 
