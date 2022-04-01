@@ -24,10 +24,9 @@ jobs:
           git config user.name "maha-hajja"
           git config user.email "maha.d.hajja@gmail.com"
           DESCRIBE="v0.2.7"
-          BUILD=`echo $DESCRIBE | awk '{split($0,a,"."); print a[2]}'`
-          BUILD="$((${BUILD} + 1))"
-          echo $BUILD
-          TAG="v0.${BUILD}.0-nightly.$(date +'%Y%m%d')"
+          MINOR_VERSION=`echo $DESCRIBE | awk '{split($0,a,"."); print a[2]}'`
+          MINOR_VERSION="$((${MINOR_VERSION} + 1))"
+          TAG="v0.${MINOR_VERSION}.0-nightly.$(date +'%Y%m%d')"
           git tag -a $TAG -m "$TAG: nightly build"
           git push origin $TAG
 
