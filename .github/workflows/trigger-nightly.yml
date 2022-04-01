@@ -23,6 +23,7 @@ jobs:
         run: |
           git config user.name "maha-hajja"
           git config user.email "maha.d.hajja@gmail.com"
+          git fetch --all --tags
           DESCRIBE= `git describe --match "v[0-9].[0-9].[0-9]" --abbrev=0`
           MINOR_VERSION=`echo $DESCRIBE | awk '{split($0,a,"."); print a[2]}'`
           MINOR_VERSION="$((${MINOR_VERSION} + 1))"
