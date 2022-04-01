@@ -24,7 +24,6 @@ jobs:
           git config user.name "maha-hajja"
           git config user.email "maha.d.hajja@gmail.com"
 
-#          DESCRIBE= `git describe --match "v[0-9].[0-9].[0-9]" --abbrev=0`
           DESCRIBE= "v0.2.7"
           BUILD=`echo $DESCRIBE | awk '{split($0,a,"-"); print a[2]}'`
           TAG="v0.$BUILD.0.$(date +'%Y%m%d')"
