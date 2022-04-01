@@ -24,25 +24,10 @@ jobs:
           git config user.name "maha-hajja"
           git config user.email "maha.d.hajja@gmail.com"
 
-          lATEST_MINOR= `git describe --match "v[0-9].[0-9].[0-9]" --abbrev=0`
-          TAG="$lATEST_MINOR-nightly.$(date +'%Y%m%d')"
+#          DESCRIBE= `git describe --match "v[0-9].[0-9].[0-9]" --abbrev=0`
+          DESCRIBE= "v0.2.7"
+          BUILD=`echo $DESCRIBE | awk '{split($0,a,"-"); print a[2]}'`
+          TAG="v0.$BUILD.0.$(date +'%Y%m%d')"
           git tag -a $TAG -m "$TAG: nightly build"
           git push origin $TAG
-      - name: 'Clean up nightly releases'
-        uses: dev-drprasad/delete-older-releases@v0.2.0
-        with:
-          keep_latest: 5
-          delete_tags: true
-          delete_tag_pattern: nightly
-        env:
-          GITHUB_TOKEN: ${{ secrets.NIGHTLY_BUILD_GH_TOKEN }}
-      - name: 'Delete nightly containers older than a week'
-        uses: snok/container-retention-policy@v1
-        with:
-          image-names: conduit
-          cut-off: 1 week ago UTC
-          account-type: org
-          org-name: ConduitIO
-          keep-at-least: 5
-          token: ${{ secrets.NIGHTLY_BUILD_GH_TOKEN }}
-          filter-tags: '*-nightly*'
+
