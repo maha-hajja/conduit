@@ -24,7 +24,7 @@ jobs:
           git config user.name "maha-hajja"
           git config user.email "maha.d.hajja@gmail.com"
 
-          DESCRIBE=`echo v0.2.7`
+          DESCRIBE="v0.2.7"
           BUILD=`echo $DESCRIBE | awk '{split($0,a,"-"); print a[2]}'`
           echo $BUILD
           TAG="v0.`echo $BUILD`.0-nightly.$(date +'%Y%m%d')"
